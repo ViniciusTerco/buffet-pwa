@@ -4,12 +4,4 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\Admin" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Views\Admin\_ViewImports.cshtml" />
-    </ItemGroup>
-
 </Project>
