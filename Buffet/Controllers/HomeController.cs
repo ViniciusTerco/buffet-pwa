@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Buffet.Models;
+using Buffet.Models.Buffet;
 using Buffet.Models.Buffet.Cliente;
 using Buffet.ViewModel.Home;
+using Buffet.ViewModel.Shared;
 
 namespace Buffet.Controllers
 {
@@ -21,17 +23,25 @@ namespace Buffet.Controllers
         }
 
         public IActionResult Index()
-        {
+        { 
+              /*
             // 1° Forma de Mandar dados para view
             ViewBag.InformacaoQualquer = "Informação Qualquer Bag";
             
             // 2° Forma de mandar dados para view
             ViewData["informacao"] = "Infomacao Qualquer Data";
             
+            */
             //3° Forma de mandar dados para view
             var ViewModel = new IndexViewModel();
             ViewModel.InformacaoQualquer = "Infomação Qualquer";
             ViewModel.Titulo = "Titulo";
+
+            ViewModel.usuarioLogado = new Usuario()
+            {
+              nome  = "Vinicius",
+              idade    = 34
+            };
             
             return View(ViewModel);
         }
@@ -39,6 +49,44 @@ namespace Buffet.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+        
+        public IActionResult StatusEvento()
+        {
+            //Acessando um service para ter lista
+            var ListaStatusEventos = new List<StatusEvento>();
+            ListaStatusEventos.Add(new StatusEvento(){Id = 1,Descricao = "Reservado"});
+            ListaStatusEventos.Add(new StatusEvento(){Id = 2,Descricao = "Confirmado"});
+            ListaStatusEventos.Add(new StatusEvento(){Id = 3,Descricao = "Realizado"});
+            
+            //Criando a view model
+            var viewmodel = new StatusEventoViewModel();
+            
+            //Alimentado a lista de Satatus
+            foreach (StatusEvento statusEvento in ListaStatusEventos)
+            {
+                viewmodel.ListaDeStatus.Add(new Status(){id = statusEvento.Id,Descricao = statusEvento.Descricao});
+            }
+          
+            return View(viewmodel);
+        }
+        
+        public IActionResult StatusConvidado()
+        {
+             //Acessando um service para ter lista
+            var ListaStatusConvidado = new List<StatusConvidado>();
+            ListaStatusConvidado.Add(new StatusConvidado(){ID = 1, Descricao = "A confirmar"});
+            ListaStatusConvidado.Add(new StatusConvidado() {ID = 2, Descricao = "Confirmado"});
+
+            //Criando a view model
+            var viewmodel = new StatusConvidadoViewModel();
+            
+            //Alimentado a lista de Satatus
+            foreach (StatusConvidado statusConvidado in ListaStatusConvidado)
+            {
+                viewmodel.ListaDeStatus.Add(new Status(){id = statusConvidado.ID,Descricao = statusConvidado.Descricao});
+            }
+            return View(viewmodel);
         }
         
         public IActionResult Clientes()

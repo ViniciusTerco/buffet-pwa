@@ -4,10 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@ViewBag.InformacaoQualquer
-
-@ViewData["informacao"]
-
 @Model.InformacaoQualquer
 @Model.Titulo
 
@@ -15,6 +11,17 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<partial name="_DadosUsuario" for="usuarioLogado"></partial>
+    
+<environment names="Produção">
+    Exibe informação em produção
+</environment>
+
+
+<environment names="Desenvolvimento">
+    Exibe informação em desenvolvimento
+</environment>
 
 
 @section InformacaoDeRodape{
