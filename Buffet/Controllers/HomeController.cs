@@ -16,6 +16,7 @@ namespace Buffet.Controllers
 {
     public class HomeController : Controller
     {
+        /*
         private readonly ILogger<HomeController> _logger;
         private readonly ClienteService _clienteService;
 
@@ -56,7 +57,7 @@ namespace Buffet.Controllers
             // 2° Forma de mandar dados para view
             ViewData["informacao"] = "Infomacao Qualquer Data";
             
-            */
+            
             //3° Forma de mandar dados para view
             var ViewModel = new IndexViewModel();
             ViewModel.InformacaoQualquer = "Infomação Qualquer";
@@ -88,6 +89,7 @@ namespace Buffet.Controllers
             return View();
         }
         
+        /*
         public IActionResult StatusEvento()
         {
             //Acessando um service para ter lista
@@ -125,7 +127,7 @@ namespace Buffet.Controllers
             }
             return View(viewmodel);
         }
-        
+        */
         
         
         
@@ -149,12 +151,15 @@ namespace Buffet.Controllers
             
             return View(viewModel);
         }
-        */
+       
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        
+        /*
         public IActionResult Error()
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
+        */
     }
 }
