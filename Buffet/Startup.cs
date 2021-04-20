@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Buffet.Data;
+using Buffet.Models.Buffet.Cliente;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,8 @@ namespace Buffet
         {
             services.AddControllersWithViews();
             services.AddDbContext<DataBaseContext>(optionsAction: option => option.UseMySql(Configuration.GetConnectionString(name:"BuffetDb")));
+            services.AddTransient<ClienteService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

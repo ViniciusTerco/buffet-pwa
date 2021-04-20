@@ -1,4 +1,5 @@
-﻿@model Buffet.ViewModel.Home.IndexViewModel
+﻿@using Buffet.ViewModel.Home
+@model Buffet.ViewModel.Home.IndexViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,6 +14,12 @@
 </div>
 
 <partial name="_DadosUsuario" for="usuarioLogado"></partial>
+
+<ul>
+        @foreach(var clientes in @Model.Clientes){
+        <li>O CLiente @clientes.nome possui o @clientes.id</li>
+        }
+</ul>
     
 <environment names="Produção">
     Exibe informação em produção

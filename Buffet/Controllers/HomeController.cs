@@ -17,20 +17,20 @@ namespace Buffet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly DataBaseContext _dataBaseContext;
+        private readonly ClienteService _clienteService;
 
         public HomeController(
             ILogger<HomeController> logger,
-            DataBaseContext databaseContext
+            ClienteService clienteService
             )
         {
             _logger = logger;
-            _dataBaseContext = databaseContext;
+            _clienteService = clienteService;
         }
 
         public IActionResult Index()
         {
-
+            /*
             var nobocliente = new ClienteEntity
             {
                 Nome = "José",
@@ -47,6 +47,8 @@ namespace Buffet.Controllers
             {
                 Console.WriteLine(cliente.Nome);
             }
+            */
+            
               /*
             // 1° Forma de Mandar dados para view
             ViewBag.InformacaoQualquer = "Informação Qualquer Bag";
@@ -65,6 +67,18 @@ namespace Buffet.Controllers
               nome  = "Vinicius",
               idade    = 34
             };
+            
+            //Trazer lista de clientes do banco
+            var clientesDoBanco = _clienteService.obterclietes();
+            foreach (var clienteEntity in clientesDoBanco)
+            {
+                ViewModel.Clientes.Add(new Cliente()
+                {
+                    id = clienteEntity.Id.ToString(), 
+                    nome = clienteEntity.Nome
+                });    
+            }
+            
             
             return View(ViewModel);
         }
@@ -112,6 +126,10 @@ namespace Buffet.Controllers
             return View(viewmodel);
         }
         
+        
+        
+        
+        /*
         public IActionResult Clientes()
         {
             // Trazer lista de entidade clientes do serviço de clientes model
@@ -131,7 +149,8 @@ namespace Buffet.Controllers
             
             return View(viewModel);
         }
-
+        */
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

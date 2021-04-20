@@ -1,12 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Buffet.Data;
 
 namespace Buffet.Models.Buffet.Cliente
 {
+
+    
     public class ClienteService
     {
+
+        private readonly DataBaseContext _dataBaseContext;
+
+        public ClienteService(DataBaseContext dataBaseContext)
+        {
+            _dataBaseContext = dataBaseContext;
+        }
+        
         public List<ClienteEntity> obterclietes()
         {
+            /*
             var listaClientes = new List<ClienteEntity>();
             listaClientes.Add(new ClienteEntity
             {
@@ -21,7 +34,8 @@ namespace Buffet.Models.Buffet.Cliente
                 Nome = "José",
                 DataDeNascimento = new DateTime(year:1980,month:12,day:20)
             });
-                return listaClientes;
+            */
+                return _dataBaseContext.Clientes.ToList();
         }
     }
 }
