@@ -8,6 +8,9 @@ namespace Buffet.Models.Buffet.Cliente
         public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime DataDeNascimento { get; set; }
+
+        public int idade { get; set; }
+        
         
     }
 }

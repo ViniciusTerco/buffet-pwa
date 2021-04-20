@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Buffet.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Buffet.Models;
@@ -16,14 +17,36 @@ namespace Buffet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataBaseContext _dataBaseContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            DataBaseContext databaseContext
+            )
         {
             _logger = logger;
+            _dataBaseContext = databaseContext;
         }
 
         public IActionResult Index()
-        { 
+        {
+
+            var nobocliente = new ClienteEntity
+            {
+                Nome = "José",
+                DataDeNascimento = new DateTime(),
+                idade = 40
+            };
+
+            _dataBaseContext.Clientes.Add(nobocliente);
+            _dataBaseContext.SaveChanges();
+            
+            var todosClientes = _dataBaseContext.Clientes.ToList();
+
+            foreach (ClienteEntity cliente in todosClientes)
+            {
+                Console.WriteLine(cliente.Nome);
+            }
               /*
             // 1° Forma de Mandar dados para view
             ViewBag.InformacaoQualquer = "Informação Qualquer Bag";
