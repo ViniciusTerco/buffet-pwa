@@ -15,7 +15,7 @@ namespace Buffet.Controllers
         
         public IActionResult Login()
         {
-            _clienteService.obterclietes();
+            //_clienteService.obterclietes();
             return View();
         }
         
